@@ -1,13 +1,14 @@
+import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
 
 export default function SearchBar({ onSearch }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const form = evt.target;
-    const topic = form.elements.topic.value;
+    const topic = form.elements.topic.value.trim();
 
-    if (form.elements.topic.value.trim() === "") {
-      alert("Please enter search term!");
+    if (topic === "") {
+      toast("Please enter search term!");
       return;
     }
 
@@ -29,6 +30,13 @@ export default function SearchBar({ onSearch }) {
           Search
         </button>
       </form>
+      <Toaster
+        toastOptions={{
+          style: {
+            marginTop: "50px",
+          },
+        }}
+      />
     </header>
   );
 }
